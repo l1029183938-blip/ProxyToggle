@@ -30,7 +30,7 @@ echo ----------------------------------------
 set "startupDir=%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup"
 set "shortcutPath=%startupDir%\ProxySwitch.lnk"
 if exist "%shortcutPath%" del /f /q "%shortcutPath%" >nul 2>&1
-powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "=New-Object -ComObject WScript.Shell;=.CreateShortcut('%shortcutPath%');.TargetPath='wscript.exe';.Arguments='//B ""%~dp0start-proxy.vbs""';.WorkingDirectory='%~dp0';.Save()"
+powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "$ws=New-Object -ComObject WScript.Shell;$sc=$ws.CreateShortcut('%shortcutPath%');$sc.TargetPath='wscript.exe';$sc.Arguments='//B ""%~dp0start-proxy.vbs""';$sc.WorkingDirectory='%~dp0';$sc.Save()"
 if exist "%shortcutPath%" (
     echo Startup shortcut created.
 ) else (
