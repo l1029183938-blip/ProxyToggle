@@ -27,8 +27,8 @@ echo.
 
 echo [3/3] 从浏览器移除扩展
 echo ----------------------------------------
-echo Chrome：chrome://extensions → 找到「代理开关」→ 点击「移除」
-echo Edge：  edge://extensions → 找到「代理开关」→ 点击「删除」
+echo Chrome：extensions page → 找到「代理开关」→ 点击「移除」
+echo Edge：  extensions page → 找到「代理开关」→ 点击「删除」
 echo.
 
 echo [可选] 删除所有文件

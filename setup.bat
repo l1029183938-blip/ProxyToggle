@@ -46,8 +46,8 @@ echo [3/3] 加载浏览器扩展
 echo ----------------------------------------
 echo 请手动完成（仅需一次）：
 echo.
-echo Chrome：chrome://extensions → 开发者模式 → 加载已解压的扩展 → 选择：%~dp0
-echo Edge：  edge://extensions → 开发人员模式 → 加载解压缩的扩展 → 选择：%~dp0
+echo Chrome：extensions page → 开发者模式 → 加载已解压的扩展 → 选择：%~dp0
+echo Edge：  extensions page → 开发人员模式 → 加载解压缩的扩展 → 选择：%~dp0
 echo.
 
 echo ========================================
