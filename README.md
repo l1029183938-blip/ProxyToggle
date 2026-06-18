@@ -1,6 +1,6 @@
 # 代理开关
 
-给自己和朋友写的翻墙插件，Chrome 和 Edge 都能用。
+为了方便弄的插件，Chrome 和 Edge 都能用。
 
 打包了 clash 后端，解压跑 setup.bat 就行，不用装别的东西。
 
