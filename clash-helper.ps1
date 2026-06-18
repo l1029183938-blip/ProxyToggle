@@ -109,17 +109,34 @@ function Switch-Node($id) {
     }
 }
 
-# 初始启动
-$initOk = Download-Config 1 (Join-Path $configsDir "config_tmp.yaml")
-if ($initOk) {
-    Copy-Item (Join-Path $configsDir "config_tmp.yaml") $configPath -Force
-    Copy-Item (Join-Path $configsDir "config_tmp.yaml") (Join-Path $configsDir "config_1.yaml") -Force
-    Remove-Item (Join-Path $configsDir "config_tmp.yaml") -Force
-} elseif (Test-Path (Join-Path $configsDir "config_1.yaml")) {
-    Copy-Item (Join-Path $configsDir "config_1.yaml") $configPath -Force
+# 初始启动：逐个尝试下载线路 1-6，下载失败则用缓存
+$started = $false
+for ($i = 1; $i -le 6; $i++) {
+    $tmpFile = Join-Path $configsDir "config_tmp.yaml"
+    $cacheFile = Join-Path $configsDir "config_${i}.yaml"
+    $downloaded = Download-Config $i $tmpFile
+    if ($downloaded) {
+        Copy-Item $tmpFile $configPath -Force
+        Copy-Item $tmpFile $cacheFile -Force
+        Remove-Item $tmpFile -Force -ErrorAction SilentlyContinue
+        $script:currentNode = $i
+        Write-Output "Downloaded config_$i from GitLab"
+        $started = $true
+        break
+    } elseif (Test-Path $cacheFile) {
+        Copy-Item $cacheFile $configPath -Force
+        $script:currentNode = $i
+        Write-Output "Using cached config_$i"
+        $started = $true
+        break
+    }
+}
+if (-not $started) {
+    Write-Output "ERROR: No config available, clash cannot start"
+    exit 1
 }
 $info = Get-Location $configPath
-$script:nodeInfo["1"] = $info
+$script:nodeInfo["$($script:currentNode)"] = $info
 Start-Clash
 
 # HTTP API
