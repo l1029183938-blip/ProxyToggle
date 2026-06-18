@@ -12,13 +12,17 @@ $DL_BASE = @(
     "https://gitlab.com/free9999/ipupdate/-/raw/master/backup/img/1/2/ipp/clash.meta2"
 )
 
-# 防多实例
-Get-Process -Name "clash.meta-windows-386" -ErrorAction SilentlyContinue | Stop-Process -Force
-Start-Sleep 0.5
+# 防多实例：如果 API 已在运行且 clash 也活着，才退出
 try {
     $check = (New-Object System.Net.Sockets.TcpClient).ConnectAsync("127.0.0.1", 9877)
-    if ($check.Wait(200)) { exit 0 }
+    if ($check.Wait(200)) {
+        $clashRunning = Get-Process -Name "clash.meta-windows-386" -ErrorAction SilentlyContinue
+        if ($clashRunning) { exit 0 }
+    }
 } catch { }
+# 杀掉旧进程，准备全新启动
+Get-Process -Name "clash.meta-windows-386" -ErrorAction SilentlyContinue | Stop-Process -Force
+Start-Sleep 0.5
 
 function Start-Clash {
     Get-Process -Name "clash.meta-windows-386" -ErrorAction SilentlyContinue | Stop-Process -Force
