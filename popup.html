@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <!-- Header -->
+  <div class="header">
+    <h3>代理开关</h3>
+    <label class="toggle" title="总开关">
+      <input type="checkbox" id="masterToggle" />
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <!-- 分段控件 -->
+  <div class="segmented" id="segmented">
+    <button data-mode="direct">直连</button>
+    <button data-mode="rule" class="active">规则</button>
+    <button data-mode="global">全局</button>
+  </div>
+
+  <!-- 状态栏 -->
+  <div class="status-bar" id="statusBar">
+    <span class="status-dot" id="statusDot"></span>
+    <span id="statusText">代理已关闭</span>
+  </div>
+
+  <!-- 节点列表 -->
+  <div class="node-list" id="nodeList"></div>
+
+  <!-- 操作行 -->
+  <button class="btn-refresh" id="btnRefresh">刷新检测</button>
+  <div class="auto-row">
+    <input type="checkbox" id="autoSelect" />
+    <label for="autoSelect">自动选择可用节点</label>
+  </div>
+
+  <!-- 脚注 -->
+  <div class="footer">仅控制浏览器代理，不影响系统网络</div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,250 @@
+/* ==================== 基础变量（Apple 设计风格） ==================== */
+:root {
+  --bg: #f2f2f7;
+  --card: #ffffff;
+  --text: #1d1d1f;
+  --text-secondary: #86868b;
+  --text-tertiary: #aeaeb2;
+  --accent: #007aff;
+  --accent-dim: rgba(0, 122, 255, 0.08);
+  --border: #e5e5ea;
+  --danger: #ff3b30;
+  --success: #34c759;
+  --warning: #ffcc02;
+  --shadow-sm: 0 0.5px 2px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 1px 4px rgba(0, 0, 0, 0.08);
+  --radius: 10px;
+  --radius-sm: 7px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  width: 300px;
+  padding: 14px;
+  font-family: -apple-system, "SF Pro Text", "SF Pro Display", "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 13px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  user-select: none;
+}
+
+/* ==================== Header ==================== */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.header h3 {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+}
+
+/* iOS Toggle */
+.toggle {
+  position: relative;
+  display: inline-block;
+  width: 49px;
+  height: 30px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.toggle input { opacity: 0; width: 0; height: 0; }
+.toggle .slider {
+  position: absolute; inset: 0;
+  background: #d1d1d6;
+  border-radius: 30px;
+  transition: background 0.25s ease;
+}
+.toggle .slider::before {
+  content: "";
+  position: absolute;
+  width: 26px; height: 26px;
+  left: 2px; bottom: 2px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15), 0 0 0 0.5px rgba(0, 0, 0, 0.04);
+  transition: transform 0.25s cubic-bezier(0.2, 0.9, 0.4, 1);
+}
+.toggle input:checked + .slider { background: var(--success); }
+.toggle input:checked + .slider::before { transform: translateX(19px); }
+
+/* ==================== 分段控件 ==================== */
+.segmented {
+  display: flex;
+  background: rgba(118, 118, 128, 0.12);
+  border-radius: 8px;
+  padding: 2px;
+  margin-bottom: 12px;
+}
+.segmented button {
+  flex: 1;
+  padding: 5px 0;
+  border: none;
+  background: transparent;
+  border-radius: 7px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text);
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+.segmented button.active {
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* ==================== 状态栏 ==================== */
+.status-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  background: var(--card);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 10px;
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+.status-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: #c7c7cc;
+  transition: background 0.3s ease;
+}
+.status-dot.ok { background: var(--success); }
+.status-dot.down { background: var(--danger); }
+.status-dot.checking { background: var(--warning); animation: pulse 0.8s infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+/* ==================== 节点列表 ==================== */
+.node-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 10px;
+  max-height: 260px;
+  overflow-y: auto;
+}
+
+.node-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 10px;
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  border: 1.5px solid transparent;
+  transition: all 0.2s ease;
+  gap: 8px;
+  cursor: pointer;
+}
+.node-item:active { transform: scale(0.985); }
+.node-item.active {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-dim), var(--shadow-sm);
+  background: #f5f9ff;
+}
+
+/* 自定义 radio */
+.node-item .radio {
+  width: 18px; height: 18px;
+  border: 2px solid #c7c7cc;
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+.node-item.active .radio {
+  border-color: var(--accent);
+  border-width: 5.5px;
+}
+
+.node-info { flex: 1; min-width: 0; }
+.node-name {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: -0.1px;
+}
+.node-detail {
+  font-size: 10.5px;
+  color: var(--text-secondary);
+  margin-top: 1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.node-status {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: #c7c7cc;
+}
+.node-status.ok { background: var(--success); }
+.node-status.down { background: var(--danger); }
+.node-status.checking,
+.node-status.switching { background: var(--warning); animation: pulse 0.8s infinite; }
+
+/* ==================== 操作行 ==================== */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.btn-refresh {
+  flex: 1;
+  padding: 7px 0;
+  background: var(--accent);
+  border: none;
+  border-radius: var(--radius-sm);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.btn-refresh:hover { opacity: 0.92; }
+.btn-refresh:active { transform: scale(0.98); opacity: 0.85; }
+.btn-refresh:disabled { background: #a0c4ff; cursor: not-allowed; }
+
+.auto-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 8px;
+}
+.auto-row label {
+  font-size: 11px;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+.auto-row input[type="checkbox"] {
+  width: 14px; height: 14px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+/* ==================== 脚注 ==================== */
+.footer {
+  text-align: center;
+  font-size: 10px;
+  color: var(--text-tertiary);
+  padding-top: 8px;
+  border-top: 0.5px solid var(--border);
+}
+
+/* ==================== 滚动条 ==================== */
+.node-list::-webkit-scrollbar { width: 3px; }
+.node-list::-webkit-scrollbar-thumb { background: #d1d1d6; border-radius: 3px; }
+.node-list::-webkit-scrollbar-track { background: transparent; }

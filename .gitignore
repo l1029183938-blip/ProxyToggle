@@ -1,0 +1,20 @@
+# clash 运行时缓存
+clash/cache.db
+
+# 系统文件
+desktop.ini
+Thumbs.db
+$RECYCLE.BIN/
+
+# 临时文件
+*.tmp
+*.log
+_fix_*.ps1
+_check.ps1
+
+# Claude
+.claude/
+
+# IDE
+.vscode/
+.idea/

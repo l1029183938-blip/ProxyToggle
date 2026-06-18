@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "代理开关",
+  "version": "1.0",
+  "description": "一个简单的浏览器代理切换插件",
+  "permissions": ["proxy", "storage"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "代理开关",
+    "default_icon": {
+      "16": "icon16.png",
+      "48": "icon48.png",
+      "128": "icon128.png"
+    }
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
+}

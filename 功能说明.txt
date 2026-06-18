@@ -1,0 +1,55 @@
+代理开关
+
+
+
+就是个浏览器翻墙插件。
+
+装了以后点一下开关就能翻，Chrome 和 Edge 都能用。
+
+
+
+怎么用：
+
+  1. 双击 setup.bat
+
+  2. 浏览器加载扩展（chrome://extensions，开开发者模式，加载已解压）
+
+  3. 点扩展图标，打开开关
+
+
+
+模式：
+
+  直连 — 不翻
+
+  规则 — 该翻的翻
+
+  全局 — 全翻，日常用这个稳
+
+
+
+线路：
+
+  2 条线，不通就换。切换的时候自动拉新配置。
+
+
+
+文件：
+
+  manifest.json       扩展配置
+
+  background.js       后台
+
+  popup.html/css/js   界面
+
+  clash-helper.ps1    后台服务，管 clash 和切换
+
+  start-proxy.vbs     开机启动
+
+  setup.bat           安装
+
+  uninstall.bat       卸载
+
+  clash/              clash 程序
+
+  rules/              GFW 域名列表
