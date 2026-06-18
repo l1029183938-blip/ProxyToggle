@@ -24,7 +24,7 @@ if not exist "%~dp0clash\clash.meta-windows-386.exe" (
 echo [1/3] 启动代理后端
 echo ----------------------------------------
 echo 正在启动 Clash.Meta 助手（端口 7890 + API 9877）...
-start "" /B powershell.exe -NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File "%~dp0clash-helper.ps1"
+start "" wscript.exe //B "%~dp0start-proxy.vbs"
 echo 代理后端已启动
 echo.
 
